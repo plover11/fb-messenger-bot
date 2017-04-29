@@ -39,7 +39,13 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    send_message(sender_id, message_text) #"roger that!")
+                    send_message(sender_id, "roger that!")
+                    
+                    if message_text == 'turn on light':
+                        response = requests.get("http://celilsemi.erkiner.com/facebook/api/on.php")
+                    
+                    if message_text == 'turn off light':
+                        response = requests.get("http://celilsemi.erkiner.com/facebook/api/off.php")
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
