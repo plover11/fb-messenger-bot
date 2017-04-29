@@ -45,7 +45,7 @@ def webhook():
                         message_text.replace('create', ' ')
                         message_text.replace('light', ' ')
                         light_name = message_text.strip()
-                        light_name.replace(' ', '_')
+                        light_name.replace(' ', '')
                         url = "http://celilsemi.erkiner.com/facebook/index.html#{}{}".format(sender_id, light_name)
                         
                         response = requests.get(url)
@@ -57,7 +57,7 @@ def webhook():
                         message_text.replace('turn', ' ')
                         message_text.replace('light', ' ')
                         light_name = message_text.strip()
-                        light_name.replace(' ', '_')
+                        light_name.replace(' ', '')
                         
                         response = requests.get("http://celilsemi.erkiner.com/facebook/api/on.php?b={}{}".format(sender_id, light_name))
                     
@@ -67,7 +67,7 @@ def webhook():
                         message_text.replace('turn', ' ')
                         message_text.replace('light', ' ')
                         light_name = message_text.strip()
-                        light_name.replace(' ', '_')
+                        light_name.replace(' ', '')
                         
                         response = requests.get("http://celilsemi.erkiner.com/facebook/api/off.php?b={}{}".format(sender_id, light_name))
 
