@@ -50,7 +50,7 @@ def webhook():
                         url = "http://celilsemi.erkiner.com/facebook/index.html#{}{}".format(sender_id, light_name)
                         
                         response = requests.get(url)
-                        
+                        send_message(sender_id, url)
                     
                     if ' on ' in message_text:
                         message_text = message_text.replace(' on ', ' ')
