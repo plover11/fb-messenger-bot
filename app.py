@@ -50,26 +50,29 @@ def webhook():
                         
                         response = requests.get(url)
                         send_message(sender_id, url)
-                    
-                    if 'on' in message_text:
                         message_text = ' ' + message_text + ' '
+                    
+                    if ' on ' in message_text:
                         message_text = message_text.replace(' on ', ' ')
                         message_text = message_text.replace('turn', ' ')
                         message_text = message_text.replace('light', ' ')
                         light_name = message_text.strip()
                         light_name = light_name.replace(' ', '_')
+                        url = "http://celilsemi.erkiner.com/facebook/api/on.php?b={}{}".format(sender_id, light_name)
                         
-                        response = requests.get("http://celilsemi.erkiner.com/facebook/api/on.php?b={}{}".format(sender_id, light_name))
+                        response = requests.get(url)
+                        send_message(url)
                     
-                    if message_text == 'turn off light':
-                        message_text = ' ' + message_text + ' '
+                    if ' off ' in message_text:
                         message_text = message_text.replace(' off ', ' ')
                         message_text = message_text.replace('turn', ' ')
                         message_text = message_text.replace('light', ' ')
                         light_name = message_text.strip()
                         light_name = light_name.replace(' ', '_')
+                        url = "http://celilsemi.erkiner.com/facebook/api/off.php?b={}{}".format(sender_id, light_name)
                         
-                        response = requests.get("http://celilsemi.erkiner.com/facebook/api/off.php?b={}{}".format(sender_id, light_name))
+                        response = requests.get(url)
+                        send_message(sender_id, url)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
