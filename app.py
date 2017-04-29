@@ -42,27 +42,33 @@ def webhook():
                     send_message(sender_id, "roger that!")
                     
                     if 'create' in message_text:
-                        string = message_text.split()
-                        light_name = string[-1]
-                        url = "http://celilsemi.erkiner.com/facebook/index.htm#{}{}".format(sender_id, light_name)
+                        message_text.replace('create', ' ')
+                        message_text.replace('light', ' ')
+                        light_name = message_text.strip()
+                        light_name.replace(' ', '_')
+                        url = "http://celilsemi.erkiner.com/facebook/index.html#{}{}".format(sender_id, light_name)
                         
                         response = requests.get(url)
                         send_message(sender_id, url)
                     
                     if 'on' in message_text:
-                        string = message_text.split()
-                        if len(string) == 2:
-                            light_name = string[0]
-                        else:
-                            light_name = string[-1]
+                        message_text = ' ' + message_text + ' '
+                        message_text.replace('on', ' ')
+                        message_text.replace('turn', ' ')
+                        message_text.replace('light', ' ')
+                        light_name = message_text.strip()
+                        light_name.replace(' ', '_')
+                        
                         response = requests.get("http://celilsemi.erkiner.com/facebook/api/on.php?b={}{}".format(sender_id, light_name))
                     
                     if message_text == 'turn off light':
-                        string = message_text.split()
-                        if len(string) == 2:
-                            light_name = string[0]
-                        else:
-                            light_name = string[-1]
+                        message_text = ' ' + message_text + ' '
+                        message_text.replace('off', ' ')
+                        message_text.replace('turn', ' ')
+                        message_text.replace('light', ' ')
+                        light_name = message_text.strip()
+                        light_name.replace(' ', '_')
+                        
                         response = requests.get("http://celilsemi.erkiner.com/facebook/api/off.php?b={}{}".format(sender_id, light_name))
 
                 if messaging_event.get("delivery"):  # delivery confirmation
