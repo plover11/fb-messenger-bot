@@ -53,7 +53,7 @@ def webhook():
                     
                     if 'on' in message_text:
                         message_text = ' ' + message_text + ' '
-                        message_text = message_text.replace('on', ' ')
+                        message_text = message_text.replace(' on ', ' ')
                         message_text = message_text.replace('turn', ' ')
                         message_text = message_text.replace('light', ' ')
                         light_name = message_text.strip()
@@ -63,7 +63,7 @@ def webhook():
                     
                     if message_text == 'turn off light':
                         message_text = ' ' + message_text + ' '
-                        message_text = message_text.replace('off', ' ')
+                        message_text = message_text.replace(' off ', ' ')
                         message_text = message_text.replace('turn', ' ')
                         message_text = message_text.replace('light', ' ')
                         light_name = message_text.strip()
