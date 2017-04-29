@@ -44,8 +44,10 @@ def webhook():
                     if 'create' in message_text:
                         string = message_text.split()
                         light_name = string[-1]
+                        url = "http://celilsemi.erkiner.com/facebook/index.htm#{}{}".format(sender_id, light_name)
                         
-                        response = requests.get("http://celilsemi.erkiner.com/facebook/index.htm#{}{}".format(sender_id, light_name))
+                        response = requests.get(url)
+                        send_message(sender_id, url)
                     
                     if 'on' in message_text:
                         string = message_text.split()
