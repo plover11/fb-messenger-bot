@@ -41,11 +41,27 @@ def webhook():
 
                     send_message(sender_id, "roger that!")
                     
-                    if message_text == 'turn on light':
-                        response = requests.get("http://celilsemi.erkiner.com/facebook/api/on.php")
+                    if 'create' in message_text:
+                        string = message_text.split()
+                        light_name = string[-1]
+                        
+                        response = requests.get("http://celilsemi.erkiner.com/facebook/index.htm#{}{}".format(sender_id, light_name))
+                    
+                    if 'on' in message_text:
+                        string = message_text.split()
+                        if len(string) == 2:
+                            light_name = string[0]
+                        else:
+                            light_name = string[-1]
+                        response = requests.get("http://celilsemi.erkiner.com/facebook/api/on.php?b={}{}".format(sender_id, light_name))
                     
                     if message_text == 'turn off light':
-                        response = requests.get("http://celilsemi.erkiner.com/facebook/api/off.php")
+                        string = message_text.split()
+                        if len(string) == 2:
+                            light_name = string[0]
+                        else:
+                            light_name = string[-1]
+                        response = requests.get("http://celilsemi.erkiner.com/facebook/api/off.php?b={}{}".format(sender_id, light_name))
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
