@@ -40,6 +40,7 @@ def webhook():
                     message_text = messaging_event["message"]["text"]  # the message's text
 
                     send_message(sender_id, "roger that!")
+                    message_text = ' ' + message_text + ' '
                     
                     if 'create' in message_text:
                         message_text = message_text.replace('create', ' ')
@@ -49,8 +50,7 @@ def webhook():
                         url = "http://celilsemi.erkiner.com/facebook/index.html#{}{}".format(sender_id, light_name)
                         
                         response = requests.get(url)
-                        send_message(sender_id, url)
-                        message_text = ' ' + message_text + ' '
+                        
                     
                     if ' on ' in message_text:
                         message_text = message_text.replace(' on ', ' ')
@@ -61,7 +61,7 @@ def webhook():
                         url = "http://celilsemi.erkiner.com/facebook/api/on.php?b={}{}".format(sender_id, light_name)
                         
                         response = requests.get(url)
-                        send_message(url)
+                        #send_message(url)
                     
                     if ' off ' in message_text:
                         message_text = message_text.replace(' off ', ' ')
@@ -72,7 +72,7 @@ def webhook():
                         url = "http://celilsemi.erkiner.com/facebook/api/off.php?b={}{}".format(sender_id, light_name)
                         
                         response = requests.get(url)
-                        send_message(sender_id, url)
+                        #send_message(sender_id, url)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
